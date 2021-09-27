@@ -26,6 +26,11 @@ if config_env() == :prod do
     secret_key_base: secret_key_base,
     server: true
 
+  config :to_pdf, ToPdf.Mailer,
+    adapter: Swoosh.Adapters.Mailjet,
+    api_key: System.get_env("MAILJET_API_KEY"),
+    secret: System.get_env("MAILJET_API_SECRET")
+    
   # ## Using releases
   #
   # If you are doing OTP releases, you need to instruct Phoenix

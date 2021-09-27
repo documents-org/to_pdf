@@ -8,6 +8,7 @@ defmodule ToPdfWeb.Printer do
 		printer = Map.get(params, "printer")
 		if valid_input and is_binary(input_data) and printer do
 			{:ok, %{
+				email: Map.get(params, "email"),
 				type: Map.get(params, "type") |> String.to_atom,
 				data: Map.get(params, "data"),
 				printer: Map.get(params, "printer"),
@@ -15,6 +16,15 @@ defmodule ToPdfWeb.Printer do
 		else
 			{:error, "Failed to find a complete body"}
 		end 
+	end
+
+	def async_print_and_notify(params) do
+		Task.start(fn () ->
+			case print(params) do
+				{:ok, filename} -> ToPdfWeb.Notifier.notify_success(params.email, filename) 
+				{:error, _} -> ToPdfWeb.Notifier.notify_failure(params.email)	
+			end
+		end)
 	end
 
 	def print(params) do

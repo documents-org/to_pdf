@@ -29,3 +29,4 @@ to_pdf-*.tar
 npm-debug.log
 /assets/node_modules/
 
+.env.dev

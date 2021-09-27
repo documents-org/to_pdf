@@ -18,6 +18,7 @@ defmodule ToPdfWeb.Router do
 
   scope "/", ToPdfWeb do
     pipe_through :browser
+    get "/download/:id", ToPdfWeb.PrintController, :download
   end
 
   # Other scopes may use custom stacks.

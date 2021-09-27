@@ -1,4 +1,6 @@
 defmodule ToPdfWeb.AuthAgent do
+	use Agent
+
 	@config_file "~/.config/to_pdf/tokens"
 
 	def initial_state() do

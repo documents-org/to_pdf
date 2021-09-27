@@ -46,7 +46,8 @@ defmodule ToPdf.MixProject do
       {:gettext, "~> 0.18"},
       {:jason, "~> 1.2"},
       {:plug_cowboy, "~> 2.5"},
-      { :pdf_generator, ">=0.6.0" }
+      {:pdf_generator, ">=0.6.0" },
+      {:uuid, "~> 1.1"}
     ]
   end
 

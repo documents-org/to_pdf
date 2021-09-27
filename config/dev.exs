@@ -18,6 +18,11 @@ config :to_pdf, ToPdfWeb.Endpoint,
     esbuild: {Esbuild, :install_and_run, [:default, ~w(--sourcemap=inline --watch)]}
   ]
 
+config :to_pdf, ToPdf.Mailer,
+  adapter: Swoosh.Adapters.Mailjet,
+  api_key: System.get_env("MAILJET_API_KEY"),
+  secret: System.get_env("MAILJET_API_SECRET")
+
 # ## SSL Support
 #
 # In order to use HTTPS in development, a self-signed
