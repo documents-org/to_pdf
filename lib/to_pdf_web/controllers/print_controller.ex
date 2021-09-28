@@ -1,19 +1,22 @@
 defmodule ToPdfWeb.PrintController do
 	use ToPdfWeb, :controller
-	import Piper
 
 	def print(conn, params) do
+		import Piper
+		
 		validated_params = to_pipable(params)
 		|> pipe(&ToPdfWeb.AuthAgent.verify/1)
 		|> pipe(&ToPdfWeb.Printer.check_body/1)
-		
-		case validated_params.email do
+
+		case val(validated_params).email do
 			nil -> print_and_send_file(conn, validated_params)
 			_ -> print_and_notify(conn, validated_params)
 		end
 	end
 
 	defp print_and_notify(conn, params) do
+		import Piper
+
 		pipe(params, &ToPdfWeb.Printer.async_print_and_notify/1)
 
 		case params do
@@ -27,7 +30,7 @@ defmodule ToPdfWeb.PrintController do
 	defp print_and_send_file(conn, params) do
 		case ToPdfWeb.Printer.sync_print_and_send_back(params) do
 			{:ok, file_path} -> do_download(conn, file_path)
-			{:error, _} -> send_resp(400, "Error in handling your request")
+			{:error, _} -> send_resp(conn, 400, "Error in handling your request")
 		end
 	end
 
@@ -36,7 +39,7 @@ defmodule ToPdfWeb.PrintController do
 			{:ok, file_path} -> do_download(conn, file_path)
 				
 
-			{:error, reason} ->
+			{:error, _reason} ->
 				conn |> send_resp(400, "Error in handling your request")
 		end
 	end

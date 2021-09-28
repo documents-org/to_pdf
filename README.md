@@ -10,7 +10,7 @@ Pour le moment, toPdf supporte ces fonctionnalités :
 - [x] Générer un PDF à partir de HTML pré-rendu  
 - [ ] Générer un PDF à partir d'une URL  
 - [x] Envoyer un e-mail avec un lien de téléchargement du PDF (valable 5 fois)  
-- [ ] Renvoyer automatiquement les e-mails en cas d'échec (incremental retry)  
+- [x] Renvoyer automatiquement les e-mails en cas d'échec (incremental retry, 5 fois, espacé de n * 5 secondes.)  
 - [ ] Internationalisation des messages aux utilisateurs
 - [ ] Avertir d'une conversion PDF échouée  
 - [ ] Avertir d'une défaillance longue durée de l'API d'envoi d'e-mails  

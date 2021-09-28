@@ -16,10 +16,10 @@ Bonjour, votre fichier PDF est prêt.
 Vous pouvez le télécharger jusqu'à cinq fois à cette URL :
 #{make_job_url(job_id)}
       """)
-    |> Mailer.deliver()
+    |> Mailer.deliver_incremental()
   end
 
-  def deliver_failure(%{name: name, email: email}) do
+  def deliver_failure(%{name: _name, email: email}) do
     new()
     |> to([email, System.get_env("APP_DEVELOPER_EMAIL")])
     |> from(get_name_email())
@@ -28,7 +28,7 @@ Vous pouvez le télécharger jusqu'à cinq fois à cette URL :
     |> text_body("""
 La conversion de votre document imprimable en PDF a échoué. Nous en sommes prévenus.
       """)
-    |> Mailer.deliver()
+    |> Mailer.deliver_incremental()
   end
 
   def test_email() do
