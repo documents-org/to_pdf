@@ -20,8 +20,8 @@ config :to_pdf, ToPdfWeb.Endpoint,
 
 config :to_pdf, ToPdf.Mailer,
   adapter: Swoosh.Adapters.Mailjet,
-  api_key: System.get_env("MAILJET_API_KEY"),
-  secret: System.get_env("MAILJET_API_SECRET")
+  api_key: System.get_env("MAILJET_API_KEY") |> String.trim(),
+  secret: System.get_env("MAILJET_API_SECRET") |> String.trim()
 
 # ## SSL Support
 #

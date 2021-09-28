@@ -3,6 +3,7 @@ defmodule ToPdfWeb.PrintController do
 	import Piper
 
 	def print(conn, params) do
+		IO.inspect(params)
 		process = to_pipable(params)
 		|> pipe(&ToPdfWeb.AuthAgent.verify/1)
 		|> pipe(&ToPdfWeb.Printer.check_body/1)
