@@ -50,3 +50,13 @@ Envoyer un `POST` sur `/print`, avec ces paramètres :
 }
 ```
 
+## Implémentation
+
+Pour le moment, le gros du travail est fait dans ces modules :
+
+- Piper (piper.ex) : utilitaire pour réprésenter des pipelines d'étapes de travail pouvant échouer
+- DownloadAgent (download_agent.ex) : Gère les liens de téléchargement et leur expiration
+- DownloadServer (download_server.ex) : Gère l'intervalle de collecte des liens expirés
+- AuthAgent (auth_agent.ex) : S'occupe de charger et vérifier les tokens valides
+- Printer (printer.ex) : Contient la délégation des tâches à Chrome / Wkhtmltopdf
+- Notifier (notifier.ex) : Envoie les notifications de succès ou d'échec des tâches
