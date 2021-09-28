@@ -17,6 +17,8 @@ Pour le moment, toPdf supporte ces fonctionnalités :
 - [] Panneau de contrôle pour voir les jobs
 - [] Panneau de contrôle pour voir les utilisateurs
 
+![](github/screenshot.png)
+
 ## Installation
 Installer les dépendances avec `mix deps.get`.
 Fournir les variables d'environnement nécessaires (voir le fichier `.env.template`) :
