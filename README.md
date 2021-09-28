@@ -4,18 +4,19 @@
 
 Pour le moment, toPdf supporte ces fonctionnalités :
 
-- [x] Authentification par token
-- [x] Générer un PDF avec wkhtmltopdf comme moteur
-- [] Générer un PDF avec chrome comme moteur
-- [x] Générer un PDF à partir de HTML pré-rendu
-- [] Générer un PDF à partir d'une URL
-- [x] Envoyer un e-mail avec un lien de téléchargement du PDF (valable 5 fois)
-- [] Renvoyer automatiquement les e-mails en cas d'échec (incremental retry)
-- [] Avertir d'une conversion PDF échouée
-- [] Avertir d'une défaillance longue durée de l'API d'envoi d'e-mails
-- [] Directement streamer le PDF en réponse à la requête
-- [] Panneau de contrôle pour voir les jobs
-- [] Panneau de contrôle pour voir les utilisateurs
+- [x] Authentification par token  
+- [x] Générer un PDF avec wkhtmltopdf comme moteur  
+- [ ] Générer un PDF avec chrome comme moteur  
+- [x] Générer un PDF à partir de HTML pré-rendu  
+- [ ] Générer un PDF à partir d'une URL  
+- [x] Envoyer un e-mail avec un lien de téléchargement du PDF (valable 5 fois)  
+- [ ] Renvoyer automatiquement les e-mails en cas d'échec (incremental retry)  
+- [ ] Internationalisation des messages aux utilisateurs
+- [ ] Avertir d'une conversion PDF échouée  
+- [ ] Avertir d'une défaillance longue durée de l'API d'envoi d'e-mails  
+- [ ] Directement streamer le PDF en réponse à la requête  
+- [ ] Panneau de contrôle pour voir les jobs  
+- [ ] Panneau de contrôle pour voir les utilisateurs  
 
 ![](github/screenshot.png)
 
