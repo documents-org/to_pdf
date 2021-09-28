@@ -27,6 +27,10 @@ defmodule ToPdfWeb.Printer do
 		end)
 	end
 
+	def sync_print_and_send_back(params) do
+		print(params)
+	end
+
 	def print(params) do
 		valid_printer = params.printer in @printers
 		if valid_printer do

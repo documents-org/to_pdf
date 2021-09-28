@@ -14,7 +14,7 @@ Pour le moment, toPdf supporte ces fonctionnalités :
 - [ ] Internationalisation des messages aux utilisateurs
 - [ ] Avertir d'une conversion PDF échouée  
 - [ ] Avertir d'une défaillance longue durée de l'API d'envoi d'e-mails  
-- [ ] Directement streamer le PDF en réponse à la requête  
+- [x] Directement streamer le PDF en réponse à la requête  
 - [ ] Panneau de contrôle pour voir les jobs  
 - [ ] Panneau de contrôle pour voir les utilisateurs  
 
@@ -45,13 +45,15 @@ Envoyer un `POST` sur `/print`, avec ces paramètres :
 ```elixir
 %{
   token: <string>
-  email: <string> (ok) | nil (non implémenté)
+  email: <string> | nil
   type: "url" (non implémenté) | "html_body" (ok)
   data: <string : url to visit> | <string : long rendered html body>
   printer: "webkit" (ok) | "chrome" (non implémenté)
   printer_params: <shell printer parameters: no user-controlled input.>
 }
 ```
+
+Si `email` est `nil`, vous recevrez le PDF en corps de la réponse.
 
 ## Implémentation
 
