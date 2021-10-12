@@ -1,4 +1,4 @@
-# ToPdf
+# ToPdf (0.2.0, 2021/10/12)
 
 ## Fonctionnalités
 
@@ -8,7 +8,7 @@ Pour le moment, toPdf supporte ces fonctionnalités :
 - [x] Générer un PDF avec wkhtmltopdf comme moteur  
 - [ ] Générer un PDF avec chrome comme moteur  
 - [x] Générer un PDF à partir de HTML pré-rendu  
-- [ ] Générer un PDF à partir d'une URL
+- [x] Générer un PDF à partir d'une URL
 - [ ] Usage d'une "job queue"
 - [x] Envoyer un e-mail avec un lien de téléchargement du PDF (valable 5 fois)  
 - [x] Renvoyer automatiquement les e-mails en cas d'échec (incremental retry, 5 fois, espacé de n * 5 secondes)  
@@ -41,13 +41,13 @@ Pour le moment, une liste de tokens est à fournir en fichier de configuration d
 
 ## Usage
 
-Envoyer un `POST` sur `/print`, avec ces paramètres :
+Envoyer un `POST` (ou un GET si il s'agit de visiter une URL) sur `/print`, avec ces paramètres :
 
 ```elixir
 %{
   token: <string>
   email: <string> | nil
-  type: "url" (non implémenté) | "html_body" (ok)
+  type: "url" | "html_body"
   data: <string : url to visit> | <string : long rendered html body>
   printer: "webkit" (ok) | "chrome" (non implémenté)
   printer_params: <shell printer parameters: no user-controlled input.>
