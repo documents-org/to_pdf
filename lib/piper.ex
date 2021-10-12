@@ -1,24 +1,28 @@
 defmodule Piper do
 	def to_pipable(value) do
-		{:ok, value, []}
+		{:pipable, :ok, value, []}
 	end
 
-	def pipe({:ok, value, _} = input, callable) do
+	def pipe({:pipable, :ok, value, _} = input, callable) do
 		case callable.(value) do
 			{:ok, new_value} -> ok(input, new_value)
 			{:error, reason} -> error(input, reason)
 		end
 	end
 
-	def pipe({:error, _, _} = arg, _), do: arg
+	def pipe({:pipable, :error, _, _} = arg, _), do: arg
 
-	def val({_, v, _}), do: v
+	def val({:pipable, _, v, _}), do: v
 
 	def error(pipeable, message) do
-		{:error, elem(pipeable, 1), [message | elem(pipeable, 2)]}
+		{:pipable, :error, elem(pipeable, 2), [message | elem(pipeable, 3)]}
 	end
 
 	def ok(pipeable, new_val) do
-		{:ok, new_val, elem(pipeable, 2)}
+		{:pipable, :ok, new_val, elem(pipeable, 3)}
 	end
+
+	def ok?({:pipable, state, _, _}), do: state == :ok
+	def errored?({:pipable, state, _, _}), do: state == :error
+	def errors({:pipable, _, _, errors}), do: errors
 end

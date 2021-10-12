@@ -48,7 +48,8 @@ defmodule ToPdf.MixProject do
       {:plug_cowboy, "~> 2.5"},
       {:pdf_generator, ">=0.6.0" },
       {:uuid, "~> 1.1"},
-      {:hackney, "~> 1.17"}
+      {:hackney, "~> 1.17"},
+      {:httpoison, "~> 1.8"}
     ]
   end
 

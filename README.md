@@ -8,12 +8,13 @@ Pour le moment, toPdf supporte ces fonctionnalités :
 - [x] Générer un PDF avec wkhtmltopdf comme moteur  
 - [ ] Générer un PDF avec chrome comme moteur  
 - [x] Générer un PDF à partir de HTML pré-rendu  
-- [ ] Générer un PDF à partir d'une URL  
+- [ ] Générer un PDF à partir d'une URL
+- [ ] Usage d'une "job queue"
 - [x] Envoyer un e-mail avec un lien de téléchargement du PDF (valable 5 fois)  
-- [x] Renvoyer automatiquement les e-mails en cas d'échec (incremental retry, 5 fois, espacé de n * 5 secondes.)  
+- [x] Renvoyer automatiquement les e-mails en cas d'échec (incremental retry, 5 fois, espacé de n * 5 secondes)  
 - [ ] Internationalisation des messages aux utilisateurs
-- [ ] Avertir d'une conversion PDF échouée  
-- [ ] Avertir d'une défaillance longue durée de l'API d'envoi d'e-mails  
+- [x] Avertir d'une conversion PDF échouée  
+- [x] Avertir d'une défaillance longue durée de l'API d'envoi d'e-mails  
 - [x] Directement streamer le PDF en réponse à la requête  
 - [ ] Panneau de contrôle pour voir les jobs  
 - [ ] Panneau de contrôle pour voir les utilisateurs  

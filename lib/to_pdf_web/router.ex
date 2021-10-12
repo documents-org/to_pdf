@@ -14,6 +14,7 @@ defmodule ToPdfWeb.Router do
     plug :accepts, ["json"]
 
     post "/print", ToPdfWeb.PrintController, :print
+    get "/print", ToPdfWeb.PrintController, :print
   end
 
   scope "/", ToPdfWeb do

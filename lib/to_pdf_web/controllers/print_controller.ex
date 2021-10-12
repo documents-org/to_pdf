@@ -19,16 +19,17 @@ defmodule ToPdfWeb.PrintController do
 
 		pipe(params, &ToPdfWeb.Printer.async_print_and_notify/1)
 
-		case params do
-			{:ok, _, _} -> conn
-    			|> send_resp(200, "PDF Job started")
-			{:error, _, errors} -> conn
-				|> send_resp(400, Enum.join(errors, "\n"))
+		if Piper.ok?(params) do
+			conn
+    		|> send_resp(200, "PDF Job started")
+    	else
+			conn
+			|> send_resp(400, Enum.join(Piper.errors(params), "\n"))
 		end
 	end
 
 	defp print_and_send_file(conn, params) do
-		case ToPdfWeb.Printer.sync_print_and_send_back(params) do
+		case ToPdfWeb.Printer.sync_print_and_send_back(Piper.val(params)) do
 			{:ok, file_path} -> do_download(conn, file_path)
 			{:error, _} -> send_resp(conn, 400, "Error in handling your request")
 		end
