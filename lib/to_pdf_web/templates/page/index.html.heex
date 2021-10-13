@@ -1,41 +1,43 @@
-<section class="phx-hero">
-  <h1><%= gettext "Welcome to %{name}!", name: "Phoenix" %></h1>
-  <p>Peace of mind from prototype to production</p>
-</section>
+<h1>ToPdf tester</h1>
 
-<section class="row">
-  <article class="column">
-    <h2>Resources</h2>
-    <ul>
-      <li>
-        <a href="https://hexdocs.pm/phoenix/overview.html">Guides &amp; Docs</a>
-      </li>
-      <li>
-        <a href="https://github.com/phoenixframework/phoenix">Source</a>
-      </li>
-      <li>
-        <a href="https://github.com/phoenixframework/phoenix/blob/v1.6/CHANGELOG.md">v1.6 Changelog</a>
-      </li>
-    </ul>
-  </article>
-  <article class="column">
-    <h2>Help</h2>
-    <ul>
-      <li>
-        <a href="https://elixirforum.com/c/phoenix-forum">Forum</a>
-      </li>
-      <li>
-        <a href="https://web.libera.chat/#elixir">#elixir on Libera Chat (IRC)</a>
-      </li>
-      <li>
-        <a href="https://twitter.com/elixirphoenix">Twitter @elixirphoenix</a>
-      </li>
-      <li>
-        <a href="https://elixir-slackin.herokuapp.com/">Elixir on Slack</a>
-      </li>
-      <li>
-        <a href="https://discord.gg/elixir">Elixir on Discord</a>
-      </li>
-    </ul>
-  </article>
-</section>
+<form method="POST" action="/print">
+  <div>
+    <label for="email">E-mail</label>
+    <input type="text" id="email" name="email">
+  </div>
+
+  <div>
+  <label for="type">Type</label>
+  <select name="type" id="type">
+    <option value="html_body">HTML Body</option>
+    <option value="url">URL</option>
+  </select>
+  </div>
+
+  <div>
+  <label for="data">Data</label>
+  <textarea id="data" name="data"></textarea>
+  </div>
+
+  <div>
+  <label for="proxy">Proxy ?</label>
+  <select id="proxy" name="proxy">
+    <option value="true">Oui</option>
+    <option value="false">Non</option>
+  </select>
+  </div>
+
+    <div>
+  <label for="printer">Printer</label>
+  <select id="printer" name="printer">
+    <option value="webkit">Webkit</option>
+    <option value="chrome" disabled>Chrome</option>
+  </select>
+  </div>
+  
+  <div>
+  <button type="submit">
+  Generate
+  </button>
+  </div>
+</form>

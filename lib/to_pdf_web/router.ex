@@ -12,9 +12,13 @@ defmodule ToPdfWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
-
+    if Mix.env() in [:dev, :test] do
+      get "/", ToPdfWeb.PageController, :home
+    end
     post "/print", ToPdfWeb.PrintController, :print
     get "/print", ToPdfWeb.PrintController, :print
+    get "/health", ToPdfWeb.PageController, :health
+    get "/asset/:handler/:id", ToPdfWeb.ProxyController, :get_asset
   end
 
   scope "/", ToPdfWeb do

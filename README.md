@@ -1,4 +1,4 @@
-# ToPdf (0.2.0, 2021/10/12)
+# ToPdf (0.3.0, 2021/10/12)
 
 ## Fonctionnalités
 
@@ -9,6 +9,7 @@ Pour le moment, toPdf supporte ces fonctionnalités :
 - [ ] Générer un PDF avec chrome comme moteur  
 - [x] Générer un PDF à partir de HTML pré-rendu  
 - [x] Générer un PDF à partir d'une URL
+- [x] Proxy HTTP pour contourner d'éventuels problèmes de certificats
 - [ ] Usage d'une "job queue"
 - [x] Envoyer un e-mail avec un lien de téléchargement du PDF (valable 5 fois)  
 - [x] Renvoyer automatiquement les e-mails en cas d'échec (incremental retry, 5 fois, espacé de n * 5 secondes)  
@@ -47,6 +48,7 @@ Envoyer un `POST` (ou un GET si il s'agit de visiter une URL) sur `/print`, avec
 %{
   token: <string>
   email: <string> | nil
+  proxy: true | false | nil
   type: "url" | "html_body"
   data: <string : url to visit> | <string : long rendered html body>
   printer: "webkit" (ok) | "chrome" (non implémenté)
@@ -66,3 +68,4 @@ Pour le moment, le gros du travail est fait dans ces modules :
 - AuthAgent (auth_agent.ex) : S'occupe de charger et vérifier les tokens valides
 - Printer (printer.ex) : Contient la délégation des tâches à Chrome / Wkhtmltopdf
 - Notifier (notifier.ex) : Envoie les notifications de succès ou d'échec des tâches
+- Proxy (proxy.ex) : Télécharge des ressources HTTPs (images, scripts, css) et les rend disponibles à des URLs locales en HTTP pour éviter les problèmes de wkhtmltopdf avec les certificats let's encrypt depuis le 30/09/2021
