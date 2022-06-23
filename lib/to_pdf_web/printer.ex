@@ -1,6 +1,8 @@
 defmodule ToPdfWeb.Printer do
 	@valid_types ["url", "html_body"]
-	@printers ["webkit"]
+
+	@printers ["webkit", "chrome"]
+
 	@default_params %{
 		"webkit" => [
             "--margin-left", "0",
@@ -12,15 +14,31 @@ defmodule ToPdfWeb.Printer do
             #"--image-dpi", "100",
             "--javascript-delay", "2000",
 		],
+		"chrome" => [
+			margin_left: 0,
+			margin_right: 0,
+			margin_top: 0,
+			margin_bottom: 0,
+			format: "A4",
+			print_background: true,
+			header_template: "",
+			footer_template: "",
+			display_header_footer: true,
+			debug: true,
+			timeout: 10000
+		],
 	}
 	def get_default_params(params) do
-		Map.get(@default_params, Map.get(params, "printer"), [])	
+		Map.get(@default_params, Map.get(params, "printer"), [])
 	end
-	
+
 	def real_bool("true"), do: true
+	def real_bool(true), do: true
 	def real_bool("false"), do: false
+	def real_bool(false), do: false
 
 	def check_body(params) do
+		IO.inspect(params)
 		valid_input = Map.get(params, "type") in @valid_types
 		input_data = Map.get(params, "data")
 		proxy = Map.get(params, "proxy", false) |> real_bool
@@ -35,14 +53,14 @@ defmodule ToPdfWeb.Printer do
 				printer_params: Map.get(params, "printer_params", get_default_params(params)) }}
 		else
 			{:error, "Failed to find a complete body"}
-		end 
+		end
 	end
 
 	def async_print_and_notify(params) do
 		Task.start(fn () ->
 			case print(params) do
-				{:ok, filename} -> ToPdfWeb.Notifier.notify_success(params.email, filename) 
-				{:error, _} -> ToPdfWeb.Notifier.notify_failure(params.email)	
+				{:ok, filename} -> ToPdfWeb.Notifier.notify_success(params.email, filename)
+				{:error, _} -> ToPdfWeb.Notifier.notify_failure(params.email)
 			end
 		end)
 	end
@@ -52,7 +70,7 @@ defmodule ToPdfWeb.Printer do
 	end
 
 	def print(params) do
-		params = ToPdfWeb.Proxy.proxify(params)		
+		params = ToPdfWeb.Proxy.proxify(params)
 		valid_printer = params.printer in @printers
 		if valid_printer do
 			apply(__MODULE__, String.to_atom("print_using_" <> params.printer), [params])
@@ -77,7 +95,26 @@ defmodule ToPdfWeb.Printer do
 			{:ok, filename} -> {:ok, filename}
 			{:error, {_, message}} -> {:error, "Failed to convert to pdf with reason : " <> message}
 		end
-	end 
+	end
 
 	def print_using_webkit(_), do: {:error, "Not Implemented"}
+
+	def print_using_chrome(%{type: :url, data: data, printer_params: printer_params}) do
+		IO.inspect(data)
+		case HTTPoison.get(data) do
+			{:ok, response} ->
+				print_using_chrome(%{type: :html_body, data: response.body, printer_params: printer_params})
+			{:error, e} ->
+				{:error, "Failed to fetch the page."}
+		end
+	end
+
+	def print_using_chrome(%{type: :html_body, data: data, printer_params: printer_params}) do
+		filename = ToPdfWeb.ProxyAgent.random_filename()
+		atomized_params = printer_params |> Enum.map(fn {k, v} -> {String.to_existing_atom(k), v} end) |> Enum.into(%{})
+		case PuppeteerPdf.Generate.from_string(data, filename, atomized_params) do
+			{:ok, _} -> {:ok, filename}
+			{:error, message} -> {:error, message}
+		end
+	end
 end

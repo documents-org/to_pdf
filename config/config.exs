@@ -7,6 +7,9 @@
 # General application configuration
 import Config
 
+config :to_pdf,
+  ecto_repos: [ToPdf.Repo]
+  
 # Configures the endpoint
 config :to_pdf, ToPdfWeb.Endpoint,
   url: [host: "localhost"],

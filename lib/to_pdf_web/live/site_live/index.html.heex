@@ -1,0 +1,39 @@
+<h1>Listing Sites</h1>
+
+<%= if @live_action in [:new, :edit] do %>
+  <%= live_modal ToPdfWeb.SiteLive.FormComponent,
+    id: @site.id || :new,
+    title: @page_title,
+    action: @live_action,
+    site: @site,
+    return_to: Routes.site_index_path(@socket, :index) %>
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Slug</th>
+      <th>Token</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody id="sites">
+    <%= for site <- @sites do %>
+      <tr id={"site-#{site.id}"}>
+        <td><%= site.name %></td>
+        <td><%= site.slug %></td>
+        <td><%= site.token %></td>
+
+        <td>
+          <span><%= live_redirect "Show", to: Routes.site_show_path(@socket, :show, site) %></span>
+          <span><%= live_patch "Edit", to: Routes.site_index_path(@socket, :edit, site) %></span>
+          <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: site.id, data: [confirm: "Are you sure?"] %></span>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<span><%= live_patch "New Site", to: Routes.site_index_path(@socket, :new) %></span>

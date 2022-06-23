@@ -1,5 +1,10 @@
 import Config
 
+config :to_pdf, ToPdf.Repo,
+  database: Path.expand("../to_pdf_dev.db", Path.dirname(__ENV__.file)),
+  pool_size: 5,
+  show_sensitive_data_on_connection_error: true
+
 # For development, we disable any cache and enable
 # debugging and code reloading.
 #

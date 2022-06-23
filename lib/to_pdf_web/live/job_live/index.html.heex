@@ -1,0 +1,43 @@
+<h1>Listing Jobs</h1>
+
+<%= if @live_action in [:new, :edit] do %>
+  <%= live_modal ToPdfWeb.JobLive.FormComponent,
+    id: @job.id || :new,
+    title: @page_title,
+    action: @live_action,
+    job: @job,
+    return_to: Routes.job_index_path(@socket, :index) %>
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Id site</th>
+      <th>Params</th>
+      <th>Status</th>
+      <th>Started at</th>
+      <th>Finished at</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody id="jobs">
+    <%= for job <- @jobs do %>
+      <tr id={"job-#{job.id}"}>
+        <td><%= job.id_site %></td>
+        <td><%= job.params %></td>
+        <td><%= job.status %></td>
+        <td><%= job.started_at %></td>
+        <td><%= job.finished_at %></td>
+
+        <td>
+          <span><%= live_redirect "Show", to: Routes.job_show_path(@socket, :show, job) %></span>
+          <span><%= live_patch "Edit", to: Routes.job_index_path(@socket, :edit, job) %></span>
+          <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: job.id, data: [confirm: "Are you sure?"] %></span>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<span><%= live_patch "New Job", to: Routes.job_index_path(@socket, :new) %></span>

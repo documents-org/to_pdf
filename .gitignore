@@ -33,3 +33,7 @@ npm-debug.log
 .env.prod
 
 fontes
+*.db
+*.db-shm
+*.db-wal
+

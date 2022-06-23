@@ -33,6 +33,12 @@ defmodule ToPdf.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
+      {:argon2_elixir, "~> 2.0"},
+      {:ecto_sql, "~> 3.6"},
+      {:ecto_sqlite3, ">= 0.0.0"},
+      {:phoenix_ecto, "~> 4.4.0"},
+      {:puppeteer_pdf, "~> 1.0.3"},
+      {:slugify, "~> 1.3"},
       {:phoenix, "~> 1.6.0-rc.0", override: true},
       {:phoenix_html, "~> 3.0"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},

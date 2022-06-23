@@ -1,0 +1,42 @@
+<h1>Show Job</h1>
+
+<%= if @live_action in [:edit] do %>
+  <%= live_modal ToPdfWeb.JobLive.FormComponent,
+    id: @job.id,
+    title: @page_title,
+    action: @live_action,
+    job: @job,
+    return_to: Routes.job_show_path(@socket, :show, @job) %>
+<% end %>
+
+<ul>
+
+  <li>
+    <strong>Id site:</strong>
+    <%= @job.id_site %>
+  </li>
+
+  <li>
+    <strong>Params:</strong>
+    <%= @job.params %>
+  </li>
+
+  <li>
+    <strong>Status:</strong>
+    <%= @job.status %>
+  </li>
+
+  <li>
+    <strong>Started at:</strong>
+    <%= @job.started_at %>
+  </li>
+
+  <li>
+    <strong>Finished at:</strong>
+    <%= @job.finished_at %>
+  </li>
+
+</ul>
+
+<span><%= live_patch "Edit", to: Routes.job_show_path(@socket, :edit, @job), class: "button" %></span> |
+<span><%= live_redirect "Back", to: Routes.job_index_path(@socket, :index) %></span>

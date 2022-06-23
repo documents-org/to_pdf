@@ -8,6 +8,7 @@ defmodule ToPdf.Application do
   @impl true
   def start(_type, _args) do
     children = [
+      ToPdf.Repo,
       # Start the Telemetry supervisor
       ToPdfWeb.Telemetry,
       # Start the PubSub system

@@ -34,6 +34,7 @@ export MAIL_FROM_NAME=
 export MAIL_FROM_ADDRESS=
 export APP_DEVELOPER_EMAIL=
 export TOPDF_PUBLIC_URL=
+export TOPDF_PROXIFIED_URL=(facultatif, si vous souhaitez utiliser le proxy)
 ```
 
 ## Authentification 
@@ -52,7 +53,7 @@ Envoyer un `POST` (ou un GET si il s'agit de visiter une URL) sur `/print`, avec
   type: "url" | "html_body"
   data: <string : url to visit> | <string : long rendered html body>
   printer: "webkit" (ok) | "chrome" (non implémenté)
-  printer_params: <shell printer parameters: no user-controlled input.>
+  printer_params: <shell printer parameters: no user-controlled input>
 }
 ```
 

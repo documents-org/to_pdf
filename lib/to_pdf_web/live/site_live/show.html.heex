@@ -1,0 +1,32 @@
+<h1>Show Site</h1>
+
+<%= if @live_action in [:edit] do %>
+  <%= live_modal ToPdfWeb.SiteLive.FormComponent,
+    id: @site.id,
+    title: @page_title,
+    action: @live_action,
+    site: @site,
+    return_to: Routes.site_show_path(@socket, :show, @site) %>
+<% end %>
+
+<ul>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @site.name %>
+  </li>
+
+  <li>
+    <strong>Slug:</strong>
+    <%= @site.slug %>
+  </li>
+
+  <li>
+    <strong>Token:</strong>
+    <%= @site.token %>
+  </li>
+
+</ul>
+
+<span><%= live_patch "Edit", to: Routes.site_show_path(@socket, :edit, @site), class: "button" %></span> |
+<span><%= live_redirect "Back", to: Routes.site_index_path(@socket, :index) %></span>
