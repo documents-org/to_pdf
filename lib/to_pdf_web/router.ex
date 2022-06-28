@@ -26,8 +26,10 @@ defmodule ToPdfWeb.Router do
 
     if Mix.env() in [:dev, :test] do
       get "/", PageController, :home
+    else
+      get "/", PageController, :health
     end
-    
+
     get "/download/:id", PrintController, :download
   end
 
