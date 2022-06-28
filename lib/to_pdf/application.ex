@@ -14,9 +14,10 @@ defmodule ToPdf.Application do
       # Start the PubSub system
       {Phoenix.PubSub, name: ToPdf.PubSub},
       # Start the Endpoint (http/https)
-      ToPdfWeb.Endpoint
+      ToPdfWeb.Endpoint,
       # Start a worker by calling: ToPdf.Worker.start_link(arg)
       # {ToPdf.Worker, arg}
+      {ToPdfWeb.AuthAgent, nil}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

@@ -2,6 +2,7 @@ defmodule ToPdfWeb.AuthAgent do
 	use Agent
 
 	@config_file "~/.config/to_pdf/tokens"
+	@env Mix.env()
 
 	def initial_state() do
 		tokens = case File.read(Path.expand(@config_file)) do
@@ -15,6 +16,9 @@ defmodule ToPdfWeb.AuthAgent do
 	def start_link() do
 		Agent.start_link(&initial_state/0, name: __MODULE__)
 	end
+	def start_link(_) do
+		Agent.start_link(&initial_state/0, name: __MODULE__)
+	end
 
 	def start_maybe() do
 		case GenServer.whereis(__MODULE__) do
@@ -24,9 +28,8 @@ defmodule ToPdfWeb.AuthAgent do
 	end
 
 	def verify(params) do
-		start_maybe()
 		token = Map.get(params, "token")
-	    if Mix.env() in [:dev, :test] do
+	    if @env in [:dev, :test] do
 	    	{:ok, params}
 	    else
 			case do_verify(token) do
