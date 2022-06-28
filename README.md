@@ -70,3 +70,21 @@ Pour le moment, le gros du travail est fait dans ces modules :
 - Printer (printer.ex) : Contient la délégation des tâches à Chrome / Wkhtmltopdf
 - Notifier (notifier.ex) : Envoie les notifications de succès ou d'échec des tâches
 - Proxy (proxy.ex) : Télécharge des ressources HTTPs (images, scripts, css) et les rend disponibles à des URLs locales en HTTP pour éviter les problèmes de wkhtmltopdf avec les certificats let's encrypt depuis le 30/09/2021
+
+## Configurer un serveur vierge pour l'impression
+
+```
+# Envoyer la release sur le serveur
+# Si vous utilisez le moteur wkhtmltopdf
+sudo apt install wkhtmltopdf
+
+# Si vous utilisez Chromium
+# Installer npm (par exemple via la distro)
+sudo apt install npm
+sudo npm i -g puppeteer-pdf
+sudo npm i -g puppeteer
+# Voir le problème soulevé ici : https://github.com/coletiv/puppeteer-pdf/issues/13
+cp -R /usr/local/lib/node_modules/puppeteer/.local-chromium/ /usr/local/lib/node_modules/puppeteer-pdf/node_modules/puppeteer/
+# Dépendances implicites de chromium 
+sudo apt install ca-certificates fonts-liberation libappindicator3-1 libasound2 libatk-bridge2.0-0 libatk1.0-0 libc6 libcairo2 libcups2 libdbus-1-3 libexpat1 libfontconfig1 libgbm1 libgcc1 libglib2.0-0 libgtk-3-0 libnspr4 libnss3 libpango-1.0-0 libpangocairo-1.0-0 libstdc++6 libx11-6 libx11-xcb1 libxcb1 libxcomposite1 libxcursor1 libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 libxss1 libxtst6 lsb-release wget xdg-utils
+```
