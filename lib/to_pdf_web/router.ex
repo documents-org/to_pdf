@@ -16,6 +16,7 @@ defmodule ToPdfWeb.Router do
   pipeline :api do
     plug :accepts, ["json"]
     post "/print", ToPdfWeb.PrintController, :print
+    post "/resample/:dpi", ToPdfWeb.PdfController, :resample
     get "/print", ToPdfWeb.PrintController, :print
     get "/health", ToPdfWeb.PageController, :health
     get "/asset/:handler/:id", ToPdfWeb.ProxyController, :get_asset

@@ -7,7 +7,6 @@ defmodule ToPdfWeb.PrintController do
 		validated_params = to_pipable(params)
 		|> pipe(&ToPdfWeb.AuthAgent.verify/1)
 		|> pipe(&ToPdfWeb.Printer.check_body/1)
-		IO.inspect(validated_params)
 		case val(validated_params).email do
 			nil -> print_and_send_file(conn, validated_params)
 			_ -> print_and_notify(conn, validated_params)

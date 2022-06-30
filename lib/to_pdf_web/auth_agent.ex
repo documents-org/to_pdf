@@ -29,7 +29,7 @@ defmodule ToPdfWeb.AuthAgent do
 
 	def verify(params) do
 		token = Map.get(params, "token")
-	    if @env in [:dev, :test] do
+	    if (@env in [:dev, :test]) do
 	    	{:ok, params}
 	    else
 			case do_verify(token) do
