@@ -1,4 +1,4 @@
-# ToPdf (0.3.0, 2021/10/12)
+# ToPdf (0.4.0, 2022/06/28)
 
 ## Fonctionnalités
 
@@ -6,7 +6,7 @@ Pour le moment, toPdf supporte ces fonctionnalités :
 
 - [x] Authentification par token  
 - [x] Générer un PDF avec wkhtmltopdf comme moteur  
-- [ ] Générer un PDF avec chrome comme moteur  
+- [x] Générer un PDF avec chrome comme moteur  
 - [x] Générer un PDF à partir de HTML pré-rendu  
 - [x] Générer un PDF à partir d'une URL
 - [x] Proxy HTTP pour contourner d'éventuels problèmes de certificats
@@ -19,6 +19,8 @@ Pour le moment, toPdf supporte ces fonctionnalités :
 - [x] Directement streamer le PDF en réponse à la requête  
 - [ ] Panneau de contrôle pour voir les jobs  
 - [ ] Panneau de contrôle pour voir les utilisateurs  
+- [ ] Utilitaires PDF (wrappers API autour de PDFJam / Ghostscript)
+- [ ] Système de crédits
 
 ![](github/screenshot.png)
 
